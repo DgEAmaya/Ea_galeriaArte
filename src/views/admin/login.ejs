@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-zinc-900 text-white flex justify-center items-center min-h-screen"
+  >
+    <form
+      method="POST"
+      action="/admin/login"
+      class="bg-zinc-800 p-6 rounded shadow-md w-80"
+    >
+      <h1 class="text-xl font-bold mb-4">Login Admin</h1>
+      <% if (typeof error !== 'undefined') { %>
+      <p class="text-red-500 mb-2"><%= error %></p>
+      <% } %>
+
+      <input
+        type="text"
+        name="username"
+        placeholder="username"
+        class="w-full mb-2 px-3 py-2 rounded bg-zinc-700"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Contraseña"
+        class="w-full mb-4 px-3 py-2 rounded bg-zinc-700"
+        required
+      />
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded"
+      >
+        Ingresar
+      </button>
+    </form>
+  </body>
+</html>

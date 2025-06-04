@@ -1,0 +1,29 @@
+<% if (session && session.isAdmin) { %>
+  <!-- Menú para admin -->
+  <aside class="w-64 min-h-screen bg-zinc-950 border-r border-zinc-800 flex flex-col p-4">
+    <h2 class="text-xl font-bold mb-6 text-white">Admin Panel</h2>
+    
+    <nav class="flex-1 space-y-2 text-white">
+      <a href="/admin/dashboard" class="block px-4 py-2 rounded hover:bg-zinc-800">Inicio</a>
+      <a href="/admin/menus" class="block px-4 py-2 rounded hover:bg-zinc-800">Menús</a>
+      <a href="/admin/pinturas" class="block px-4 py-2 rounded hover:bg-zinc-800">Pinturas</a>
+    </nav>
+    
+    <form action="/admin/logout" method="POST" class="mt-4">
+      <button class="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white">
+        Cerrar sesión
+      </button>
+    </form>
+  </aside>
+
+<% } else { %>
+  <!-- Menú para visitantes -->
+  <nav class="bg-zinc-900 text-white p-4">
+    <ul class="flex space-x-4">
+      <li><a href="/" class="hover:underline">Inicio</a></li>
+      <li><a href="/obras" class="hover:underline">Obras</a></li>
+      <li><a href="/artistas" class="hover:underline">Artistas</a></li>
+      <li><a href="/admin/login" class="hover:underline">Iniciar Sesión</a></li>
+    </ul>
+  </nav>
+<% } %>

@@ -1,0 +1,65 @@
+
+<h1 class="text-2xl font-bold mb-6">Gestión de Menús</h1>
+
+<!-- 📝 Formulario de Crear/Editar -->
+<div class="bg-zinc-800 p-6 rounded mb-10">
+  <form action="<%= formAction || '/admin/menus' %>" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input type="hidden" name="id" value="<%= menu?.id || '' %>">
+    
+    <div>
+      <label class="block text-sm mb-1">Nombre</label>
+      <input type="text" name="nombre" value="<%= menu?.nombre || '' %>" required class="w-full px-4 py-2 rounded bg-zinc-900 border border-zinc-700 text-white" />
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1">Enlace</label>
+      <input type="text" name="enlace" value="<%= menu?.enlace || '' %>" required class="w-full px-4 py-2 rounded bg-zinc-900 border border-zinc-700 text-white" />
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1">Padre ID</label>
+      <input type="number" name="padre_id" value="<%= menu?.padre_id || 0 %>" class="w-full px-4 py-2 rounded bg-zinc-900 border border-zinc-700 text-white" />
+    </div>
+
+    <div class="flex items-end">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+        <%= menu ? 'Actualizar' : 'Crear' %> Menú
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- 📋 Tabla de Menús -->
+<div class="overflow-x-auto">
+  <table class="min-w-full text-sm text-left text-gray-300 bg-zinc-900 border border-zinc-700">
+    <thead class="text-xs uppercase bg-zinc-800 text-gray-400">
+      <tr>
+        <th class="px-6 py-3">ID</th>
+        <th class="px-6 py-3">Nombre</th>
+        <th class="px-6 py-3">Enlace</th>
+        <th class="px-6 py-3">Padre ID</th>
+        <th class="px-6 py-3">Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-700">
+      <% if (menus.length > 0) { %>
+        <% menus.forEach(menu => { %>
+          <tr class="hover:bg-zinc-800 transition">
+            <td class="px-6 py-4"><%= menu.id %></td>
+            <td class="px-6 py-4"><%= menu.nombre %></td>
+            <td class="px-6 py-4 text-blue-400"><a href="<%= menu.enlace %>"><%= menu.enlace %></a></td>
+            <td class="px-6 py-4"><%= menu.padre_id %></td>
+            <td class="px-6 py-4 space-x-2">
+              <a href="/admin/menus/<%= menu.id %>" class="text-blue-400 hover:text-blue-600">✏️ Editar</a>
+              <form action="/admin/menus/eliminar/<%= menu.id %>" method="POST" class="inline">
+                <button type="submit" class="text-red-400 hover:text-red-600">🗑️ Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr><td colspan="5" class="px-6 py-4 text-center">No hay menús registrados.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
